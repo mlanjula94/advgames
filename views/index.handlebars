@@ -1,0 +1,55 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   
+    <h3>{{subhead}}</h3>
+    <a class="btn btn-lg" href="{{link.url}}">
+      {{link.text}}
+    </a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h1>AVDGames</h1>
+    <div class="col-4">
+      <p>Wack A Mole!</p>
+    </div>
+    <div class="col-4">
+      <p>Wack A Mole!</p>
+    </div>
+    <div class="col-4">
+      <p>Wack A Mole!</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <p>Wack A Mole!</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody counter-reset="tableRow" ;>
+
+          {{#each WMScore}}
+          <tr data-id="{{this.id}}">
+            <th counter-incremen="tableRow" content=counter(tableRow) scope="row"></th>
+            <td>{{this.username}}</td>
+            <td>{{this.score}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <p>Wack A Mole!</p>
+    </div>
+    <div class="col-4">
+      <p>Wack A Mole!</p>
+    </div>
+  </div>
+</div>

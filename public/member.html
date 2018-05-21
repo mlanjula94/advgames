@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Home Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link href="stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/logout">
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <div>Welcome
+          <span class="member-name"></span>
+        </div>
+        <img class="img-fluid" id="member-photo" href="http://via.placeholder.com/150x150" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row mt-5 mb-5">
+      <div class="col-sm-4 text-center">
+        <a href="./wackAMole.html">
+          <img class="img" src="images/wack-a-mole.png" alt="liri" class="rounded-0">
+          <p class="text-info">Wack A Mole</p>
+        </a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody id="wm_tbody" counter-reset="tableRow" ;>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-4 text-center">
+        <a href="./snake.html">
+          <img class="img" src="https://lh4.ggpht.com/yJe6HqfvYKO2ej-qfsoWf50T71o4346gXkF6T66FMXBAjJ5DhMt7buBDESUMqYaeIqI=w300" alt="bamazon" class="rounded-0">
+          <p class="text-info">Friend Finder</p>
+        </a>
+      </div>
+      <div class="col-sm-4 text-center">
+        <a href="./flappybird.html">
+          <img class="img" src="https://assets.pcmag.com/media/images/416710-7-tips-for-high-scores-on-flappy-bird.jpg?thumb=y&width=810&height=456" alt="flappybird" class="rounded-0">
+          <p class="text-info">Flappy Bird</p>
+        </a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody id="fb_tbody" counter-reset="tableRow" ;>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+   
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/members.js"></script>
+
+</body>
+
+</html>
