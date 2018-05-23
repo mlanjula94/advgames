@@ -27,5 +27,29 @@ module.exports = function (app) {
   app.get("/members", isAuthenticated, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/member.html"));
   });
+  app.get("/settings", isAuthenticated, function (req, res) {
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/settings.html"));
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
+  app.get("/wackAMole", isAuthenticated, function (req, res) {
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/wackAMole.html"));
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
+  app.get("/flappybird", isAuthenticated, function (req, res) {
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/flappybird.html"));
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
+  app.get("/snake", isAuthenticated, function (req, res) {
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/snake.html"));
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
 
 };

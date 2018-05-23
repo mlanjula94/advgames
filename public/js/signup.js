@@ -37,6 +37,7 @@ $(document).ready(function () {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function signUpUser(formData) {
+    console.log(formData);
     $.ajax({
       url: "/api/signup",
       data: formData,
@@ -46,7 +47,7 @@ $(document).ready(function () {
       method: 'POST',
     }).then(function (data) {
       console.log(data);
-      window.location.replace(data) 
+     // window.location.replace(data) 
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
   }
@@ -56,4 +57,9 @@ $(document).ready(function () {
     $("#alert .msg").text(err);
     $("#alert").fadeIn(500);
   }
+  var particles = Particles.init({
+    selector: '.background',
+    color: '#DA0463',
+    maxParticles: 1000
+  });
 });

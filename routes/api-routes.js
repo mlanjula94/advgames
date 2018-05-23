@@ -29,13 +29,13 @@ module.exports = function (app) {
 
   /*
 
-  Route for signing up a user. Since we are sending an image with the POST request, we cannot use body-parser since it cannot read the file's data, so we use Formidable instead. 
+    Route for signing up a user. Since we are sending an image with the POST request, we cannot use body-parser since it cannot read the file's data, so we use Formidable instead. 
 
-  Once we parse out the form and extract the image's data, we send that image's data to Cloudinary. When it's done uploading there, it executes our callback function and includes all of the newly uploaded image's data so we can use that URL to store in the user's table.
+    Once we parse out the form and extract the image's data, we send that image's data to Cloudinary. When it's done uploading there, it executes our callback function and includes all of the newly uploaded image's data so we can use that URL to store in the user's table.
   
-  The user's password is automatically hashed and stored securely thanks to how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in, otherwise send back an error 
+    The user's password is automatically hashed and stored securely thanks to how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in, otherwise send back an error 
   
-  */
+    */
   app.post("/api/signup", function (req, res) {
 
     // Create a new instance of formidable to handle the request info
@@ -50,7 +50,7 @@ module.exports = function (app) {
       if (files.photo) {
         // upload file to cloudinary, which'll return an object for the new image
         cloudinary.uploader.upload(files.photo.path, function (result) {
-          console.log(result);
+          console.log(JSON.stringify(result));
           // create new user
           db.User.create({
             email: fields.email,
@@ -65,7 +65,7 @@ module.exports = function (app) {
                 return res.status(422).json(err);
               }
               console.log(req.user);
-              res.json("/members");
+              //res.json("/members");
             });
           }).catch(function (err) {
             console.log(err)
@@ -140,7 +140,7 @@ module.exports = function (app) {
         res.json(err);
       });
   });
-  
+
   app.get("/api/scores/high/:game/:user", function (req, res) {
 
     db.Scores
@@ -208,5 +208,40 @@ module.exports = function (app) {
   });
 
 
+  app.put("/api/edit/image/:id", function (req, res) {
 
-};
+    console.log("++++++++++++++++++++"+JSON.stringify(req.body))
+      /* IF PHOTO/FILE EXISTS */
+      if (req.body.photo) {
+        // upload file to cloudinary, which'll return an object for the new image
+        cloudinary.uploader.upload(req.body.photo.path, function (result) {
+          console.log(result);
+          // create new user
+          db.User.update({
+            photo: result.secure_url,
+          }, {
+            where: {
+              id: req.body.id
+            }
+          }).catch(function (err) {
+            console.log(err)
+           // res.status(422).json(err);
+          });
+        });
+        /* IF NO PHOTO/FILE */
+      } else {
+        db.User.update({
+          photo: null,
+        }, {
+          where: {
+            id: req.body.id
+          }
+        }).catch(function (err) {
+          console.log(err)
+         // res.status(422).json(err);
+        });
+      }
+    });
+
+  
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>AVD settigns</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="stylesheets/sideBarStyle.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>
+          AVD Settings
+        </h3>
+
+      </div>
+
+      <ul class="list-unstyled components">
+
+        <li class="active">
+          <a href="./member.html">Home</a>
+        </li>
+        <li>
+          <a href="./settings.html">Settings</a>
+
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+        <li>
+          <a href="/logout">
+            Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="content" class="container">
+
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+          <div class="navbar-header">
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <h2>Settigns Form</h2>
+            <p class="text-left">Username :
+              <span class=" text-dark member-name"></span>
+            </p>
+            <hr>
+            <button type="button" class="btn btn-info" id="edit_image">&#x2702;</button>
+            <p class="text-left">Profile Picture :
+              <img class="img-fluid" id="member-photo" href="http://via.placeholder.com/50x50" />
+              <form class="img_form" >
+              <div class="form-group">
+                <label for="exampleInputPassword1">File Image</label>
+                <input type="file" class="form-control" id="file-input">
+              </div>
+              <button type="submit" class="btn btn-info" >Submit</button>
+              </form>
+            </p>
+
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/settings.js"></script>
+    <canvas class="background"></canvas>
+    <script src="./js/particles.min.js"></script> 
+
+</body>
+
+</html>

@@ -8,82 +8,122 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
     crossorigin="anonymous">
   <link rel="stylesheet" href="./stylesheets/style.css">
+  <link href="stylesheets/sideBarStyle.css" rel="stylesheet">
 </head>
 
 <body>
+  <div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>Welcome to Wack A Mole
+          <span class="member-name"></span>
+          <img class="img-fluid" id="member-photo" href="http://via.placeholder.com/150x150" />
+        </h3>
 
-
-  <h1>Whack-a-mole!
-    <span class="score" id=score>0</span>
-  </h1>
-  <div class="container">
-    <div class="row">
-
-      <div class="game">
-        <div class="hole hole1">
-          <div class="mole"></div>
-        </div>
-        <div class="hole hole2">
-          <div class="mole"></div>
-        </div>
-        <div class="hole hole3">
-          <div class="mole"></div>
-        </div>
-        <div class="hole hole4">
-          <div class="mole"></div>
-        </div>
-        <div class="hole hole5">
-          <div class="mole"></div>
-        </div>
-        <div class="hole hole6">
-          <div class="mole"></div>
-        </div>
       </div>
 
+      <ul class="list-unstyled components">
 
+        <li class="active">
+          <a href="./member.html">Home</a>
+        </li>
+        <li>
+          <a href="./snake.html">Snakes</a>
+        </li>
+        <li>
+          <a href="./flappybird.html">Flappy Bird</a>
+        </li>
+        <li>
+          <a href="/logout">
+            Logout
+          </a>
+        </li>
+      </ul>
+      <p>
+        Click as much as moles you can within ten seconds to earn points.
+      </p>
+    </nav>
+
+    <div id="content" class="container">
+
+
+      <h1>Whack-a-mole!
+        <span class="score" id=score>0</span>
+      </h1>
+      <div class="container">
+        <div class="row">
+
+          <div class="game">
+            <div class="hole hole1">
+              <div class="mole"></div>
+            </div>
+            <div class="hole hole2">
+              <div class="mole"></div>
+            </div>
+            <div class="hole hole3">
+              <div class="mole"></div>
+            </div>
+            <div class="hole hole4">
+              <div class="mole"></div>
+            </div>
+            <div class="hole hole5">
+              <div class="mole"></div>
+            </div>
+            <div class="hole hole6">
+              <div class="mole"></div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="row mt-3">
+          <div class="col-5"></div>
+          <div class="col-2">
+            <button class="btn-block btn-lg" onClick="startGame()">Start!</button>
+          </div>
+          <div class="col-5"></div>
+
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-5">Recent Scores
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Score</th>
+                </tr>
+              </thead>
+              <tbody id="wm_tbody" counter-reset="tableRow" ;>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-2">
+          </div>
+          <div class="col-5">High Scores
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Score</th>
+                </tr>
+              </thead>
+              <tbody id="wm_highscore_tbody" counter-reset="tableRow" ;>
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+      </div>
     </div>
-    <div class="row mt-3">
-      <div class="col-5"></div>
-      <div class="col-2">
-        <button class="btn-block btn-lg" onClick="startGame()">Start!</button>
-      </div>
-      <div class="col-5"></div>
+  </div>
 
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-5">Recent Scores
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Score</th>
-            </tr>
-          </thead>
-          <tbody id="wm_tbody" counter-reset="tableRow" ;>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-2">
-      </div>
-      <div class="col-5">High Scores
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Score</th>
-            </tr>
-          </thead>
-          <tbody id="wm_highscore_tbody" counter-reset="tableRow" ;>
-          </tbody>
-        </table>
-      </div>
-
-
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/wackAMole.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/wackAMole.js"></script>
+  <canvas class="background"></canvas>
+  <script src="./js/particles.min.js"></script>
 
 </body>
 

@@ -3,6 +3,7 @@ Create by Learn Web Developement
 Youtube channel : https://www.youtube.com/channel/UC8n8ftV94ZU_DJLOLtrpORA
 */
 
+
 const cvs = document.getElementById("snake");
 const ctx = cvs.getContext("2d");
 
@@ -38,15 +39,15 @@ down.src = "../audio/down.mp3";
 let snake = [];
 
 snake[0] = {
-    x : 9 * box,
-    y : 10 * box
+    x: 9 * box,
+    y: 10 * box
 };
 
 // create the food
 
 let food = {
-    x : Math.floor(Math.random()*17+1) * box,
-    y : Math.floor(Math.random()*15+3) * box
+    x: Math.floor(Math.random() * 17 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 3) * box
 }
 
 // create the score var
@@ -57,29 +58,29 @@ let score = 0;
 
 let d;
 
-document.addEventListener("keydown",direction);
+document.addEventListener("keydown", direction);
 
-function direction(event){
+function direction(event) {
     let key = event.keyCode;
-    if( key == 37 && d != "RIGHT"){
+    if (key == 37 && d != "RIGHT") {
         left.play();
         d = "LEFT";
-    }else if(key == 38 && d != "DOWN"){
+    } else if (key == 38 && d != "DOWN") {
         d = "UP";
         up.play();
-    }else if(key == 39 && d != "LEFT"){
+    } else if (key == 39 && d != "LEFT") {
         d = "RIGHT";
         right.play();
-    }else if(key == 40 && d != "UP"){
+    } else if (key == 40 && d != "UP") {
         d = "DOWN";
         down.play();
     }
 }
 
 // cheack collision function
-function collision(head,array){
-    for(let i = 0; i < array.length; i++){
-        if(head.x == array[i].x && head.y == array[i].y){
+function collision(head, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (head.x == array[i].x && head.y == array[i].y) {
             return true;
         }
     }
@@ -88,83 +89,140 @@ function collision(head,array){
 
 // draw everything to the canvas
 
-function draw(){
-    
-    ctx.drawImage(ground,0,0);
-    
-    for( let i = 0; i < snake.length ; i++){
-        ctx.fillStyle = ( i == 0 )? "green" : "gray";
-        ctx.fillRect(snake[i].x,snake[i].y,box,box);
-        
-      //  ctx.strokeStyle = "red";
-       ctx.strokeRect(snake[i].x,snake[i].y,box,box);
+function draw() {
+
+    ctx.drawImage(ground, 0, 0);
+
+    for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = (i == 0) ? "green" : "gray";
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+
+        //  ctx.strokeStyle = "red";
+        ctx.strokeRect(snake[i].x, snake[i].y, box, box);
     }
-    
+
     ctx.drawImage(foodImg, food.x, food.y);
-    
+
     // old head position
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
-    
+
     // which direction
-    if( d == "LEFT") snakeX -= box;
-    if( d == "UP") snakeY -= box;
-    if( d == "RIGHT") snakeX += box;
-    if( d == "DOWN") snakeY += box;
-    
+    if (d == "LEFT") snakeX -= box;
+    if (d == "UP") snakeY -= box;
+    if (d == "RIGHT") snakeX += box;
+    if (d == "DOWN") snakeY += box;
+
     // if the snake eats the food
-    if(snakeX == food.x && snakeY == food.y){
+    if (snakeX == food.x && snakeY == food.y) {
         score++;
         eat.play();
         food = {
-            x : Math.floor(Math.random()*17+1) * box,
-            y : Math.floor(Math.random()*15+3) * box
+            x: Math.floor(Math.random() * 17 + 1) * box,
+            y: Math.floor(Math.random() * 15 + 3) * box
         }
         // we don't remove the tail
-    }else{
+    } else {
         // remove the tail
         snake.pop();
     }
-    
+
     // add new Head
-    
+
     let newHead = {
-        x : snakeX,
-        y : snakeY
+        x: snakeX,
+        y: snakeY
     }
-    
+
     // game over
-    
-    if(snakeX < box || snakeX > 17 * box || snakeY < 3*box || snakeY > 17*box || collision(newHead,snake)){
+
+    if (snakeX < box || snakeX > 17 * box || snakeY < 3 * box || snakeY > 17 * box || collision(newHead, snake)) {
         clearInterval(game);
         dead.play();
+        saveResult();
     }
-    
+
     snake.unshift(newHead);
-    
+
     ctx.fillStyle = "white";
     ctx.font = "45px Changa one";
-    ctx.fillText(score,2*box,1.6*box);
+    ctx.fillText(score, 2 * box, 1.6 * box);
 }
 
 // call draw function every 100 ms
 
-let game = setInterval(draw,100);
+let game = setInterval(draw, 100);
+
+function saveResult() {
+    var userId;
+    $.get("/api/user_data").then(function (data) {
+        userId = data.id;
+        var scoreData = {
+            game: "Snakes",
+            score: score,
+            userId: userId
+        }
+        // Grab the URL of the website
+        var currentURL = window.location.origin;
+
+        $.post(currentURL + "/api/scores", scoreData, function () {
+            location.reload();
+        })
+    })
+}
+
+$.get("/api/user_data").then(function (user) {
+    $.get("/api/scores/high/Snakes/" + user.id, function (data) {
+        console.log(data.length);
+
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i].User.username);
+            var rank = i + 1;
+            var html = '<tr class="tr">' +
+                '<td>' + rank + '</td>' +
+                '<td>' + data[i].score + '</td>' +
+                '</tr>';
+            $("#sn_highscore_tbody").append(html);
+        }
+    })
+})
 
 
 
+$.get("/api/user_data").then(function (user) {
+    $.get("/api/scores/Snakes/" + user.id, function (data) {
+        console.log(data.length);
 
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i].User.username);
+            var rank = i + 1;
+            var html = '<tr>' +
+                '<td>' + rank + '</td>' +
+                '<td>' + data[i].score + '</td>' +
+                '</tr>';
+            $("#sn_tbody").append(html);
+        }
+    })
+})
 
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+    $.get("/api/user_data").then(function (data) {
+        console.log(data);
+        $(".member-name").text(data.username);
+        $("#member-photo").attr("src", data.photo);
 
+    });
+})
 
-
-
-
-
-
-
-
-
-
-
-
+window.onload = function () {
+    var particles = Particles.init({
+        selector: '.background',
+        color: '#DA0463',
+        maxParticles: 1000
+    });
+    
+}

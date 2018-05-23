@@ -75,9 +75,9 @@ $.get("/api/user_data").then(function (user) {
     for (var i = 0; i < data.length; i++) {
       console.log(data[i].User.username);
       var rank = i + 1;
-      var html = '<tr>' +
+      var html = '<tr class="tr">' +
         '<td>' + rank + '</td>' +
-        '<td>' + data[i].User.username + '</td>' +
+        '</td>' +
         '<td>' + data[i].score + '</td>' +
         '</tr>';
       $("#wm_highscore_tbody").append(html);
@@ -94,10 +94,31 @@ $.get("/api/user_data").then(function (user) {
       var rank = i + 1;
       var html = '<tr>' +
         '<td>' + rank + '</td>' +
-        '<td>' + data[i].User.username + '</td>' +
+        '</td>' +
         '<td>' + data[i].score + '</td>' +
         '</tr>';
       $("#wm_tbody").append(html);
     }
   })
 })
+
+$(document).ready(function () {
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+  });
+  $.get("/api/user_data").then(function (data) {
+    console.log(data);
+    $(".member-name").text(data.username);
+    $("#member-photo").attr("src", data.photo);
+
+  });
+})
+
+window.onload = function () {
+  var particles = Particles.init({
+    selector: '.background',
+    color: '#DA0463',
+    maxParticles: 1000
+  });
+}

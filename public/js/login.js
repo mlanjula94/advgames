@@ -34,5 +34,10 @@ $(document).ready(function () {
       console.log(err);
     });
   }
+  var particles = Particles.init({
+    selector: '.background',
+    color: '#DA0463',
+    maxParticles: 1000
+  });
 
 });

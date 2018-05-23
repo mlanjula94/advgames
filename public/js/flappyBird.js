@@ -19,7 +19,7 @@ var constant = pipeNorth.height + gap;
 var bx = 40;
 var by = 150;
 var gravity = 1.5;
-var score =0;
+var score = 0;
 var gameOver = false;
 
 //pipe coordinates
@@ -45,23 +45,22 @@ function startGame() {
     if (pipe[i].x === 125) {
       pipe.push({
         x: canvas.width,
-        y: Math.floor(Math.random() * pipeNorth.height) - pipeNorth.height 
+        y: Math.floor(Math.random() * pipeNorth.height) - pipeNorth.height
       });
     }
     if (bx + bird.width >= pipe[i].x && bx <= pipe[i].x + pipeNorth.width && (by <= pipe[i].y + pipeNorth.height || by + bird.height >= pipe[i].y + constant) || by + bird.height >= canvas.height - fg.height) {
-      gameOver=true;
+      gameOver = true;
       //alert("Hello! I am an alert box!");
 
     }
-    
+
     if (pipe[i].x == 5) {
       score++
     }
 
   }
-  if(gameOver){
+  if (gameOver) {
     saveResult();
-    alert("Hello! I am an alert box!");
     location.reload();
     return false;
   }
@@ -90,7 +89,6 @@ function moveUp() {
 }
 
 function saveResult() {
-  console.log("I get called")
   var userId;
   $.get("/api/user_data").then(function (data) {
     userId = data.id;
@@ -101,9 +99,9 @@ function saveResult() {
     }
     // Grab the URL of the website
     var currentURL = window.location.origin;
-  
+
     $.post(currentURL + "/api/scores", scoreData, function () {
-     //location.reload();
+      //location.reload();
     })
   })
 }
@@ -115,9 +113,9 @@ $.get("/api/user_data").then(function (user) {
     for (var i = 0; i < data.length; i++) {
       console.log(data[i].User.username);
       var rank = i + 1;
-      var html = '<tr>' +
+      var html = '<tr class="tr">' +
         '<td>' + rank + '</td>' +
-        '<td>' + data[i].User.username + '</td>' +
+        '</td>' +
         '<td>' + data[i].score + '</td>' +
         '</tr>';
       $("#fb_highscore_tbody").append(html);
@@ -134,10 +132,28 @@ $.get("/api/user_data").then(function (user) {
       var rank = i + 1;
       var html = '<tr>' +
         '<td>' + rank + '</td>' +
-        '<td>' + data[i].User.username + '</td>' +
+       '</td>' +
         '<td>' + data[i].score + '</td>' +
         '</tr>';
       $("#fb_tbody").append(html);
     }
   })
 })
+$(document).ready(function () {
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+  });
+  $.get("/api/user_data").then(function (data) {
+    console.log(data);
+    $(".member-name").text(data.username);
+    $("#member-photo").attr("src", data.photo);
+
+  });
+  var particles = Particles.init({
+    selector: '.background',
+    color: '#DA0463',
+    maxParticles: 1000
+  });
+})
+

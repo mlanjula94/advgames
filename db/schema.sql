@@ -1,1 +1,0 @@
-CREATE DATABASE advgames_db;
