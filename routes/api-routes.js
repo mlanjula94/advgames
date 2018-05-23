@@ -203,14 +203,13 @@ module.exports = function (app) {
       .catch(function (err) {
         console.log(err);
         res.json(err);
-        //location.reload();
       });
   });
 
 
   app.put("/api/edit/image/:id", function (req, res) {
 
-    console.log("++++++++++++++++++++"+JSON.stringify(req.body))
+    console.log(JSON.stringify(req.body))
       /* IF PHOTO/FILE EXISTS */
       if (req.body.photo) {
         // upload file to cloudinary, which'll return an object for the new image
