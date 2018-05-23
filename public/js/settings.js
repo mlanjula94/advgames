@@ -1,4 +1,8 @@
 var id;
+$('#sidebarCollapse').on('click', function () {
+  $('#sidebar').toggleClass('active');
+  $(this).toggleClass('active');
+});
 
 $(document).ready(function () {
   var particles = Particles.init({
@@ -38,13 +42,31 @@ $(document).ready(function () {
 
 })
 
+$("#dact_image").click(function () {
+  $("#member-photo").css("display", "none");
+  $(".img_form").show();
+  var txt;
+    if (confirm("Are you sure you want to deactivate?"+ id)) {
+      $.ajax({
+        method: "DELETE",
+        url: "/api/deactivate/" + id
+      })
+        .then(get);
+    
+    } else {
+        txt = "You pressed Cancel!";
+    }
+});
+
+
+
 $("#edit_image").click(function () {
   $("#member-photo").css("display", "none");
   $(".img_form").show();
 });
 
 function editUser(formData) {
-  console.log("iiiiii"+formData.id);
+  console.log(formData.id);
 
   //.then(location.reload())
   $.ajax({

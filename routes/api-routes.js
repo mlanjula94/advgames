@@ -65,7 +65,7 @@ module.exports = function (app) {
                 return res.status(422).json(err);
               }
               console.log(req.user);
-              //res.json("/members");
+              res.json("/members");
             });
           }).catch(function (err) {
             console.log(err)
@@ -241,6 +241,16 @@ module.exports = function (app) {
          // res.status(422).json(err);
         });
       }
+    });
+
+    app.delete("/api/deactivate/:id", function(req, res) {
+      db.User.destroy({
+        where: {
+          id: req.params.id
+        }
+      }).then(function(dbScores) {
+        res.render("/logout");
+      });
     });
 
   

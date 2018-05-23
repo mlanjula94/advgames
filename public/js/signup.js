@@ -47,14 +47,15 @@ $(document).ready(function () {
       method: 'POST',
     }).then(function (data) {
       console.log(data);
-     // window.location.replace(data) 
+      window.location.replace(data) 
+      
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
   }
 
   function handleLoginErr(err) {
     console.log(err);
-    $("#alert .msg").text(err);
+    $("#alert .msg").text(JSON.stringify(err));
     $("#alert").fadeIn(500);
   }
   var particles = Particles.init({
