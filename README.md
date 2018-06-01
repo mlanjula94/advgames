@@ -51,3 +51,10 @@ Login (https://giphy.com/gifs/avd-login-3q2xoTnRXn3IXtPv6A/fullscreen)
 $ npm start
 ```
 
+### Resources
+``` 
+https://www.youtube.com/watch?v=9TcU2C1AACw
+https://www.youtube.com/watch?v=L07i4g-zhDA
+https://www.javascript30.com/
+```
+
