@@ -1,17 +1,53 @@
-# express-auth-formidable
+# AVD GAMES
+> a public quizing application built in Node, Express, MySQL, HTML, CSS and JavaScript
 
-> A boilerplate for getting started with Node, Express, Sequelize, Formidable, PassportJS, and Cloudinary
+## Contributors
+* **Anjula Epainghe** [github](https://github.com/mlanjula94)
 
-### Steps to run
 
-1. Create database and hook it into `config.json`
+## Technologies Used
+### Back End
+- MySQL
+- Sequelize
+- Node.js
+- Express
+- Passport.js
 
-2. Go to cloudinary.com and create an account to receive API key information
+### Front End
+- HTML
+- CSS
+- JavaScript
+- jQuery
+- AJAX
+- Bootstrap Framework
+- Particle.js
 
-3. Create `.env` file looking like this:
+
+## AVD Games In Action
+Login (https://giphy.com/gifs/avd-login-3q2xoTnRXn3IXtPv6A/fullscreen)
+
+
+
+
+## Quick start
+
+### In order to run a local copy / development version, please make a config/config.json file in the root directory:
+
+*Make sure to also create a database called '"advgamesUsers_db"' as well.
+```json
+{
+"development": {
+"username": YOUR_USERNAME,
+"password": YOUR_PASSWORD,
+"database": "advgamesUsers_db",
+"host": "127.0.0.1",
+"dialect": "mysql"
+}
+}
 ```
-CLOUDINARY_NAME=<NAME>
-CLOUDINARY_API_KEY=<APIKEY>
-CLOUDINARY_API_SECRET=<APISECRET>
+
+### If you have nodemon installed globablly, you can run the app with:
+``` shell
+$ npm start
 ```
 
